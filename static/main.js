@@ -71,7 +71,7 @@ require([
         ws.send('Hello, world');
     };
     ws.onmessage = function (evt) {
-        alert(evt.data);
+        alert(JSON.parse(evt.data)['color']);
     };
 
     var meshData = ShapeCreator.createSphere(24, 24, 1.0); // 3 - radius
