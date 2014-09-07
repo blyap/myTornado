@@ -37,21 +37,20 @@ class ChatSocketHandler(tornado.websocket.WebSocketHandler):
     cache_size = 200
 
     def open(self):
-        ChatSocketHandler.waiters.add(self)
-
-    def on_close(self):
-        ChatSocketHandler.waiters.remove(self)
-
-    def on_message(self, message):
+        print('WebSocket opened')
         ddd = {
             "size": 1.0,
             "color": 0.0,
             }
         for r in range(3):
-            self.write_message(message=tornado.escape.json_encode(ddd))
+            self.write_message(tornado.escape.json_encode(ddd))
+
+    def on_close(self):
+        print('WebSocket closed')
+
+    def on_message(self, message):
         logging.info("got message %r", message)
         parsed = message #tornado.escape.json_decode(message)
-        print('answer:' + parsed)
 
 
 def main():
