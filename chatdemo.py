@@ -5,7 +5,6 @@ import tornado.options
 import tornado.web
 import tornado.websocket
 import os.path
-import uuid
 
 from tornado.options import define, options
 
@@ -29,12 +28,9 @@ class Application(tornado.web.Application):
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render("index.html", messages=ChatSocketHandler.cache)
+        self.render("index.html")
 
 class ChatSocketHandler(tornado.websocket.WebSocketHandler):
-    waiters = set()
-    cache = []
-    cache_size = 200
 
     def open(self):
         print('WebSocket opened')
