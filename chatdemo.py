@@ -5,6 +5,7 @@ import tornado.options
 import tornado.web
 import tornado.websocket
 import os.path
+import random
 
 from tornado.options import define, options
 
@@ -37,6 +38,8 @@ class ChatSocketHandler(tornado.websocket.WebSocketHandler):
         ddd = {
             "size": 1.0,
             "color": 0.0,
+            "coord": (1.0, 1.0, 1.0),
+            "index": 12.0
             }
         for r in range(3):
             self.write_message(tornado.escape.json_encode(ddd))
@@ -47,7 +50,6 @@ class ChatSocketHandler(tornado.websocket.WebSocketHandler):
     def on_message(self, message):
         logging.info("got message %r", message)
         parsed = message #tornado.escape.json_decode(message)
-
 
 def main():
     tornado.options.parse_command_line()
